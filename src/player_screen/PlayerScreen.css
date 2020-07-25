@@ -1,0 +1,104 @@
+.player_main_div{
+    width: fit-content;
+    margin: auto;
+    position: relative;
+}
+.player_screen_card {
+    width: 325px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 10px #00000029;
+    border: 1px solid #F7F7F7;
+    border-radius: 15px;
+    opacity: 1;
+    padding: 30px 20px;
+}
+.player_scren_card_divs{
+    border-radius: 7px;
+    opacity: 1;
+    height: 70px;
+    border: 1px solid #70707026;
+    margin-bottom: 5px;
+    margin-left: 12px;
+    margin-right: 12px;
+    position: relative;
+}
+.player_1_div{
+    background-color: #DCF6E4
+}
+.player_2_div{
+    background-color: #F6EFD5
+}
+.player_3_div{
+    background-color: #EFF3FF
+}
+.player_4_div{
+    background-color: #EFF3FF
+}
+.horizontal_line{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-color: #c6c6c66e;
+}
+.player-avatar_outer_div{
+    box-shadow: 1px 2px 3px #000000a1;
+    border-radius: 50%;
+}
+.player-avatar_div{
+    padding: 8px 0px 1px 0px;
+    border-radius: 50%;
+    display: -ms-flexbox;
+    display: flex;
+    width: 40px;
+    height: 33PX;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: transparent;
+}
+.player_avatar_div_1{
+    border: solid 8px #42ac5d;
+    box-shadow: inset 1px 1px 3px #278D48;
+}
+.player_avatar_div_2{
+    border:solid 8px #F8D146;
+    box-shadow: inset 1px 1px 3px  #BB9A22;
+}
+.player_avatar_div_3{
+    border:solid 8px #B1C4F9;
+}
+.player_avatar_div_4{
+    border:solid 8px #B1C4F9;
+}
+.player_div_grid{
+    align-items: center !important;
+    height: inherit;
+    margin: 0 !important;
+}
+.player_div_grid_1_item{
+    position: absolute;
+    left: 6px;
+}
+.player_div_grid_2_item{
+    margin-left: 31px !important;
+    padding-left: 44px !important;
+    border-bottom: solid 1px #8080807d;
+    width: calc(100% - 51px);
+    height: 50px;
+}
+.start_game_btn{
+    border-radius: 10px;
+    opacity: 1;
+    width: 100%;
+    cursor: pointer;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    height: 45px;
+    border: navajowhite;
+    color: white;
+    font-size: 18px;
+    font-family: sans-serif;
+    outline: none;
+    background-color: #4B7BFF;
+}

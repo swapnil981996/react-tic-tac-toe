@@ -1,0 +1,150 @@
+.start_main_div{
+    width: fit-content;
+    margin: auto;
+    position: relative;
+}
+.start_screen_header{
+    padding-left: 25px;
+    margin-bottom: 17px;
+}
+.start_screen_heading{
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0px;
+    color: #3D4276;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    opacity: 1;
+    margin-bottom: 5px;
+}
+.start_screen_phrase{
+    text-align: left;
+    font: Regular 18px/27px Poppins;
+    letter-spacing: 0px;
+    color: #949494;
+    font-size: 9px;
+    width: 100px;
+    /* font: small-caption; */
+    opacity: 1;
+}
+.start_screen_main_div{
+    height: 390px;
+    background: #EEEEEE 0% 0% no-repeat padding-box;
+    border-radius: 30px;
+    opacity: 1;
+}
+.strat_screen_card{
+    width: 360px;
+    height: 290px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 10px #00000029;
+    border: 1px solid #F7F7F7;
+    border-radius: 30px;
+    opacity: 1;
+    padding: 20px;
+}
+.start_card_first_div{
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    height: 50%;
+    border-bottom: solid 1px #ededed;
+}
+.start_card_second_div{
+    height: 50%;
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+}
+.start_play_btn{
+    width: 66px;
+    height: 66px;
+    background: #FF7243 0% 0% no-repeat padding-box;
+    box-shadow: 10px 10px 50px #FF724373;
+    border-radius: 10px;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.start_play_btn_logo{
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px
+}
+.start_play_btn_text{
+    font-size: 11px;
+    font-family: monospace;
+    text-align: center;
+    letter-spacing: 3px;
+    color: #424242;
+}
+.logo_img{
+    position: absolute;
+    height: 309px;
+    right: -46px;
+    top: -50px;
+}
+.start_screen_btn_div{
+    width: 100%
+}
+.start_screen_btn_row{
+    display: flex;
+    justify-content: space-between;
+}
+.start_screen_btn{
+    border-radius: 10px;
+    opacity: 1;
+    width: 170px;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    padding-left: 14px;
+    height: 45px;
+    border: navajowhite;
+    color: white;
+    font-size: 15px;
+    font-family: sans-serif;
+    outline: none;
+    margin-bottom: 7px;
+    margin-top: 7px;
+}
+.start_screen_customer_game{
+    background: #4BABFF 0% 0% no-repeat padding-box;
+}
+.start_screen_player_game{
+    background: #4B7BFF 0% 0% no-repeat padding-box;
+}
+.start_screen_online_games{
+    background: #4B4BFF 0% 0% no-repeat padding-box;
+}
+.start_screen_training_game{
+    background: #6E4BFF 0% 0% no-repeat padding-box;
+}
+.start_screen_footer{
+    text-align: left;
+    color: #424242;
+    padding-left: 20px;
+    height: 50px;
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+}
+.start_screen_btn_img{
+    position: relative;
+    height: 23px;
+    top: 0;
+    margin-right: 11px;
+    right: 0;
+}
+.start__screen_dialog{
+    height: 200px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.link_decoration{
+    text-decoration: none;
+}
