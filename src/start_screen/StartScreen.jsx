@@ -57,7 +57,7 @@ export default class StartScreen extends Component {
                                 <img src={customerimg} className='start_screen_btn_img'/>
                                 Custom Game
                             </button >
-                            <Link to="/players" className='link_decoration'>
+                            <Link to="/players" onClick={()=>{this.props.setStateValue('isallowed',true)}} className='link_decoration'>
                                 <button className='start_screen_btn start_screen_player_game'>
                                     <img src={playerimg} className='start_screen_btn_img'/>
                                     Two Players

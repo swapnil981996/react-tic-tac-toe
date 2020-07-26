@@ -9,7 +9,10 @@ import Dialog from '@material-ui/core/Dialog';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
+import {Link} from "react-router-dom";
 import {withStyles} from '@material-ui/core/styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faArrowLeft} from '@fortawesome/fontawesome-free-solid'
 
 const styles=() => ({
     input: {
@@ -68,6 +71,13 @@ export const PopupDailog = (props) =>{
         }
     }
 
+    componentDidMount = () =>{
+        if(!this.props.isallowed)
+        {
+            window.location.href='#/'
+        }
+    }
+
     oepnPopup= (value,isopen) =>{
         this.setState({
             [value]:isopen
@@ -93,6 +103,8 @@ export const PopupDailog = (props) =>{
             this.setState({
                 no_of_games:this.state.value,
                 player_select:false
+            },()=>{
+                this.props.setNoOfGame(this.state.no_of_games)
             })
         }
         
@@ -111,6 +123,32 @@ export const PopupDailog = (props) =>{
             this.setState({
                 starts:this.state.start_value,
                 open:false
+            },()=>{
+                if(this.state.start_value==='Winner first')
+                {
+                    this.props.setWhoseTurn(this.props.winner)
+                }
+                else if(this.state.start_value==='Looser first')
+                {
+                    this.props.setWhoseTurn(this.props.losser)
+                }
+                else if(this.state.start_value==='Always player 01')
+                {
+                    this.props.setWhoseTurn('player1')
+                }
+                else if(this.state.start_value==='Always player 02')
+                {
+                    this.props.setWhoseTurn('player2')
+                }
+                else if(this.state.start_value==='Alternative turn')
+                {
+                    this.props.setWhoseTurn('player2')
+                }
+                else
+                {
+                    this.props.setWhoseTurn('player1')
+                }
+
             })
         }
         
@@ -120,6 +158,14 @@ export const PopupDailog = (props) =>{
       const classes=this.props
     return (   
         <div className='player_main_div'>
+            <div className='app-header'>
+                <Link to='/' className='app_header_left_arrw'>
+                    <FontAwesomeIcon  icon={faArrowLeft}/>
+                </Link>
+                <div>
+                    Two Players Game
+                </div>
+            </div>
             <div className='player_screen_card'>
                 <div className='player_scren_card_divs player_1_div'>
                     <Grid className='player_div_grid' container spacing={1} alignItems="flex-end">
@@ -133,7 +179,9 @@ export const PopupDailog = (props) =>{
                         <Grid className='player_div_grid_2_item' item>
                             <TextField 
                                 classes={classes.textField} 
-                                id="input-with-icon-grid"
+                                id="player_1"
+                                value={this.props.player_1}
+                                onChange={this.props.setPlayerName}
                                 InputProps={{
                                     className: this.props.classes.input, // usually you dont need this and you only need classes, but just wanted to show that you can use
                                     classes: {
@@ -158,8 +206,10 @@ export const PopupDailog = (props) =>{
                         </Grid>
                         <Grid className='player_div_grid_2_item' item>
                             <TextField 
-                                classes={classes.textField} 
-                                id="input-with-icon-grid"
+                                classes={classes.textField}
+                                id='player_2' 
+                                value={this.props.player_2}
+                                onChange={this.props.setPlayerName}
                                 InputProps={{
                                     className: this.props.classes.input, // usually you dont need this and you only need classes, but just wanted to show that you can use
                                     classes: {
@@ -231,9 +281,11 @@ export const PopupDailog = (props) =>{
                 </div>
                 <hr className='horizontal_line'/>
                 <div style={{padding:'0 12px'}}>
-                    <button className='start_game_btn'>
-                        Start Game
-                    </button>
+                    <Link to='/game'>
+                        <button className='start_game_btn'>
+                            Start Game
+                        </button>
+                    </Link>
                 </div>        
             </div>   
             <PopupDailog
@@ -287,11 +339,11 @@ export const PopupDailog = (props) =>{
                                     Alternative turn
                             </div>
                             <div className='player_selection_div'>
-                                <FormControlLabel style={{margin:0}} value="Looser first" control={<Radio color='primary' />}/>
+                                <FormControlLabel disabled={this.props.looser?false:true} style={{margin:0}} value="Looser first" control={<Radio color='primary' />}/>
                                     Looser first     
                             </div>
                             <div className='player_selection_div'>
-                                <FormControlLabel style={{margin:0}} value="Winner first" control={<Radio color='primary' />}/>
+                                <FormControlLabel disabled={this.props.winner?false:true} style={{margin:0}} value="Winner first" control={<Radio color='primary' />}/>
                                     Winner first
                             </div>
                             <div className='player_selection_div'>
