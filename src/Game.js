@@ -42,7 +42,8 @@ class Game extends React.Component {
       isNextGame:false,
       player1_score:0,
       player2_score:0,
-      who_won_tornament:''
+      who_won_tornament:'',
+      isGameOver:false
     };
   }
 
@@ -88,7 +89,7 @@ class Game extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? '01' : 'O2';
+    squares[i] = this.state.xIsNext ? '01' : '02';
     this.setState({
       history: history.concat([{
         squares: squares
@@ -125,7 +126,8 @@ class Game extends React.Component {
               player1_score:this.state.player1_score+1
           })
         }
-        else
+        console.log(winner)
+        if(winner=='02')
         {
           this.props.setWinnerAndLooser('winner','player2')
           this.props.setWinnerAndLooser('looser','player1')
@@ -135,18 +137,25 @@ class Game extends React.Component {
             player2_score:this.state.player2_score+1
           })
         }
+
         if(parseInt(this.props.no_of_games)<game_no )
         {
-          if((parseInt(this.props.no_of_games)/2)<this.state.player1_score)
+          if(this.state.player2_score<this.state.player1_score)
           {
             this.setState({
               who_won_tornament:'01'
             })
           }
-          if((parseInt(this.props.no_of_games)/2)<this.state.player2_score)
+          else if(this.state.player1_score<this.state.player2_score)
           {
             this.setState({
               who_won_tornament:'02'
+            })
+          }
+          else{
+            this.setState({
+              isGameOver:true,
+              playing_game:'play again'
             })
           }
         }
@@ -247,9 +256,17 @@ class Game extends React.Component {
                   </div>}
                 </div>:
                 <div>
-                  <div className='game_info_header_div'>
-                    Playing game {this.state.playing_game}
-                  </div>  
+                  {
+                    this.state.isGameOver?
+                    <div className='game_info_header_div'>  
+                      No one win
+                    </div>
+                    :
+                    <div className='game_info_header_div'>
+                      Playing game {this.state.playing_game}
+                    </div>  
+                  }
+                  
                 </div>  
               }
             </div>  
