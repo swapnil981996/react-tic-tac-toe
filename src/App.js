@@ -24,6 +24,9 @@ class App extends Component {
             <Route path='/players'>
               <PlayerScreen/>
             </Route>
+            <Route path='/game'>
+              <Game/>
+            </Route>
           </Switch>
         </HashRouter>  
       </div>

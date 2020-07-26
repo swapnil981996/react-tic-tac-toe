@@ -5,6 +5,10 @@ import avatar1 from '../images/avatar01.png'
 import avatar2 from '../images/avatar02.png'
 import winner from '../images/winner.png'
 import run from '../images/run.png'
+import Dialog from '@material-ui/core/Dialog';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Radio from '@material-ui/core/Radio';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles=() => ({
@@ -29,24 +33,89 @@ const styles=() => ({
             borderColor: '#FFFFFF',
             borderWidth: 2
         },
-    }
+    },
+    
     });
+
+
+export const PopupDailog = (props) =>{
+    return(
+        <Dialog
+            PaperProps={{
+                style: { borderRadius: 15 }
+            }}
+            open={props.open}
+        >
+              {
+                  props.children
+              } 
+        </Dialog>
+    )
+}  
+    
  class PlayerScreen extends Component {
 
     constructor(props)
     {
         super(props)
         this.state={
-            open:false
+            open:false,
+            player_select:false,
+            value:'',
+            no_of_games:'',
+            start_value:'',
+            starts:''
         }
     }
 
-    oepnPopup= (isopen) =>{
+    oepnPopup= (value,isopen) =>{
         this.setState({
-            open:isopen
+            [value]:isopen
         })
     }
 
+    handleRadioChange = (value,event) => {
+        this.setState({
+            [value]:event.target.value
+        })
+      };
+
+    setNoOfGames = (isCancel) =>{
+        if(isCancel)
+        {
+            this.setState({
+                no_of_games:'',
+                value:'',
+                player_select:false
+            })    
+        }
+        else{
+            this.setState({
+                no_of_games:this.state.value,
+                player_select:false
+            })
+        }
+        
+    }
+
+    setWhoStarts = (isCancel) =>{
+        if(isCancel)
+        {
+            this.setState({
+                starts:'',
+                start_value:'',
+                open:false
+            })    
+        }
+        else{
+            this.setState({
+                starts:this.state.start_value,
+                open:false
+            })
+        }
+        
+    }
+      
   render() {
       const classes=this.props
     return (   
@@ -105,7 +174,7 @@ const styles=() => ({
                     </Grid>
                 </div>
                 <div className='player_scren_card_divs player_3_div'>
-                <Grid className='player_div_grid' container spacing={1} alignItems="flex-end">
+                <Grid onClick={()=>{this.oepnPopup('player_select',true)}} style={{cursor:'pointer'}} className='player_div_grid' container spacing={1} alignItems="flex-end">
                         <Grid className='player_div_grid_1_item' item>
                             <div className=''>
                                 <div className='player-avatar_div player_avatar_div_3' style={{alignItems:'baseline'}}>
@@ -116,6 +185,7 @@ const styles=() => ({
                         <Grid className='player_div_grid_2_item' item>
                             <TextField 
                                 disabled
+                                value={this.state.no_of_games?this.state.no_of_games+" Games":''}
                                 classes={classes.textField} 
                                 id="input-with-icon-grid"
                                 InputProps={{
@@ -132,7 +202,7 @@ const styles=() => ({
                     </Grid>
                 </div>
                 <div className='player_scren_card_divs player_4_div'>
-                <Grid className='player_div_grid' container spacing={1} alignItems="flex-end">
+                <Grid onClick={()=>{this.oepnPopup('open',true)}} className='player_div_grid' container spacing={1} alignItems="flex-end">
                         <Grid className='player_div_grid_1_item' item>
                             <div className=''>
                                 <div className='player-avatar_div player_avatar_div_4'  style={{alignItems:'baseline'}}>
@@ -143,6 +213,7 @@ const styles=() => ({
                         <Grid className='player_div_grid_2_item' item>
                             <TextField 
                                 disabled
+                                value={this.state.starts?this.state.starts:''}
                                 classes={classes.textField} 
                                 id="input-with-icon-grid"
                                 InputProps={{
@@ -164,7 +235,85 @@ const styles=() => ({
                         Start Game
                     </button>
                 </div>        
-            </div>    
+            </div>   
+            <PopupDailog
+                open={this.state.player_select}
+            >
+                <div className='player_popup'>
+                    <div className='player_group_header'>
+                        Number of game
+                    </div>
+                    <div className='player_selection_main_div'>
+                        <RadioGroup value={this.state.value} onChange={(event)=>{this.handleRadioChange('value',event)}}>
+                            <div className='player_selection_div'>
+                                <FormControlLabel style={{margin:0}} value="2" control={<Radio color='primary' />}/>
+                                2 Games
+                            </div>
+                            <div className='player_selection_div'>
+                                <FormControlLabel style={{margin:0}} value="3" control={<Radio color='primary' />}/>
+                                3 Games      
+                            </div>
+                            <div className='player_selection_div'>
+                                <FormControlLabel style={{margin:0}} value="5" control={<Radio color='primary' />}/>
+                                5 Games
+                            </div>
+                            <div className='player_selection_div'>
+                                <FormControlLabel style={{margin:0}} value="10" control={<Radio color='primary' />}/>
+                                10 Games
+                            </div>
+                        </RadioGroup>    
+                    </div>  
+                    <div className='player_selection_btn_div'>
+                        <button onClick={()=>{this.setNoOfGames(true)}} className='player_selection_btn player_selection_cancel_btn'>
+                            CANCEL
+                        </button>
+                        <button onClick={()=>{this.setNoOfGames(false)}} className='player_selection_btn player_selection_ok_btn'>
+                            OK
+                        </button>
+                    </div>                           
+                </div>
+            </PopupDailog>
+            <PopupDailog
+                open={this.state.open}
+            >
+                <div className='player_popup'>
+                    <div className='player_group_header'>
+                        Who starts
+                    </div>
+                    <div className='player_selection_main_div'>
+                        <RadioGroup value={this.state.start_value} onChange={(event)=>{this.handleRadioChange('start_value',event)}}>
+                            <div className='player_selection_div'>
+                                <FormControlLabel style={{margin:0}} value="Alternative turn" control={<Radio color='primary' />}/>
+                                    Alternative turn
+                            </div>
+                            <div className='player_selection_div'>
+                                <FormControlLabel style={{margin:0}} value="Looser first" control={<Radio color='primary' />}/>
+                                    Looser first     
+                            </div>
+                            <div className='player_selection_div'>
+                                <FormControlLabel style={{margin:0}} value="Winner first" control={<Radio color='primary' />}/>
+                                    Winner first
+                            </div>
+                            <div className='player_selection_div'>
+                                <FormControlLabel style={{margin:0}} value="Always player 01" control={<Radio color='primary' />}/>
+                                    Always player 01
+                            </div>
+                            <div className='player_selection_div'>
+                                <FormControlLabel style={{margin:0}} value="Always player 02" control={<Radio color='primary' />}/>
+                                    Always player 02
+                            </div>
+                        </RadioGroup>    
+                    </div>  
+                    <div className='player_selection_btn_div'>
+                        <button onClick={()=>{this.setWhoStarts(true)}} className='player_selection_btn player_selection_cancel_btn'>
+                            CANCEL
+                        </button>
+                        <button onClick={()=>{this.setWhoStarts(false)}} className='player_selection_btn player_selection_ok_btn'>
+                            OK
+                        </button>
+                    </div>                           
+                </div>
+            </PopupDailog> 
         </div>
     );
   }
