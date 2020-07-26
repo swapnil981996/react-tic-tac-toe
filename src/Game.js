@@ -87,7 +87,6 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber+1)
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    console.log(this.state.history,squares)
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -106,7 +105,6 @@ class Game extends React.Component {
       let winner = calculateWinner(current.squares);
       this.winner=winner
       let status; 
-      console.log(winner)
       if(winner){
         let game_no=parseInt(this.state.playing_game) + 1
         this.setState({
@@ -130,7 +128,6 @@ class Game extends React.Component {
               player1_score:this.state.player1_score+1,
           })
         }
-        console.log(winner)
         if(winner=='02')
         {
           this.props.setWinnerAndLooser('winner','player2')
