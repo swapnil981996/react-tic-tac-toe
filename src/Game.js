@@ -43,7 +43,8 @@ class Game extends React.Component {
       player1_score:0,
       player2_score:0,
       who_won_tornament:'',
-      isGameOver:false
+      isGameDraw:false,
+      isGameOver:false,
     };
   }
 
@@ -86,6 +87,7 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber+1)
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+    console.log(this.state.history,squares)
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -104,11 +106,13 @@ class Game extends React.Component {
       let winner = calculateWinner(current.squares);
       this.winner=winner
       let status; 
+      console.log(winner)
       if(winner){
         let game_no=parseInt(this.state.playing_game) + 1
         this.setState({
           nextplayer:'',
           isNextGame:true,
+          isGameOver:true,
           playing_game:parseInt(this.props.no_of_games)>=game_no ?
                         game_no:
                        'play again'
@@ -123,7 +127,7 @@ class Game extends React.Component {
           this.setState({
               xIsNext:true,
               nextplayer:'01',
-              player1_score:this.state.player1_score+1
+              player1_score:this.state.player1_score+1,
           })
         }
         console.log(winner)
@@ -154,11 +158,19 @@ class Game extends React.Component {
           }
           else{
             this.setState({
-              isGameOver:true,
+              isGameDraw:true,
               playing_game:'play again'
             })
           }
         }
+      }
+      else{
+       
+          this.setState({
+            isGameOver:true
+          })
+       
+        
       }
     });
   }
@@ -170,6 +182,7 @@ class Game extends React.Component {
         squares: Array(9).fill(null)
       }],
       stepNumber: 0,
+      isGameOver:false
     })
     if(this.winner==='01')
     {
@@ -257,11 +270,6 @@ class Game extends React.Component {
                 </div>:
                 <div>
                   {
-                    this.state.isGameOver?
-                    <div className='game_info_header_div'>  
-                      No one win
-                    </div>
-                    :
                     <div className='game_info_header_div'>
                       Playing game {this.state.playing_game}
                     </div>  
@@ -303,14 +311,14 @@ class Game extends React.Component {
               </div>
             </div>
             <div style={{display:'grid',marginTop:'20px'}}>
-              {this.state.playing_game==='play again'?
+              {this.state.playing_game==='play again' || this.state.isGameDraw?
               <Link to='/players'>
                 <button className='game_play_board_button game_board_undo' onClick={() => this.nextGame()}>
                   Play Again
                 </button>
               </Link> 
               :
-              this.state.isNextGame?
+              this.state.isNextGame || (this.state.isNextGame && this.state.isGameOver) ?
                 <button className='game_play_board_button game_board_undo' onClick={() => this.nextGame()}>
                 Next Game
               </button>
