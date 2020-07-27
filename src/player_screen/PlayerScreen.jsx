@@ -239,6 +239,7 @@ export const PopupDailog = (props) =>{
                                 classes={classes.textField} 
                                 id="input-with-icon-grid"
                                 InputProps={{
+                                    style:{color:'black',cursor:'pointer'},
                                     className: this.props.classes.input, // usually you dont need this and you only need classes, but just wanted to show that you can use
                                     classes: {
                                       focused: this.props.classes.focused,
@@ -267,12 +268,12 @@ export const PopupDailog = (props) =>{
                                 classes={classes.textField} 
                                 id="input-with-icon-grid"
                                 InputProps={{
-                                    className: this.props.classes.input, // usually you dont need this and you only need classes, but just wanted to show that you can use
+                                    style:{color:'black',cursor:'pointer'},
+                                    className: this.props.classes.input, 
                                     classes: {
                                       focused: this.props.classes.focused,
                                       notchedOutline: classes.notchedOutline,
                                       underline:classes.underline
-                                      // because i used variant="outlined" i can pass any classes here that the OutlinedInput uses
                                     },
                                   }}
                                 label="who starts" />

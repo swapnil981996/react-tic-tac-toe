@@ -83,7 +83,7 @@ class Game extends React.Component {
     this.props.setWinnerAndLooser('looser','')
   }
 
-  handleClick(i) {
+   handleClick =  (i) => {
     const history = this.state.history.slice(0, this.state.stepNumber+1)
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -99,7 +99,7 @@ class Game extends React.Component {
       stepNumber: history.length,
       nextplayer: this.state.xIsNext ? '02' : '01',
       undo:true,
-    },()=>{
+    },async ()=>{
       let history = this.state.history;
       let current = history[this.state.stepNumber];
       let winner = calculateWinner(current.squares);
@@ -107,7 +107,7 @@ class Game extends React.Component {
       let status; 
       if(winner){
         let game_no=parseInt(this.state.playing_game) + 1
-        this.setState({
+        await this.setState({
           nextplayer:'',
           isNextGame:true,
           isGameOver:true,
@@ -122,7 +122,7 @@ class Game extends React.Component {
         {
           this.props.setWinnerAndLooser('winner','player1')
           this.props.setWinnerAndLooser('looser','player2')
-          this.setState({
+          await this.setState({
               xIsNext:true,
               nextplayer:'01',
               player1_score:this.state.player1_score+1,
@@ -132,13 +132,13 @@ class Game extends React.Component {
         {
           this.props.setWinnerAndLooser('winner','player2')
           this.props.setWinnerAndLooser('looser','player1')
-          this.setState({
+          await this.setState({
             xIsNext:false,
             nextplayer:'02',
             player2_score:this.state.player2_score+1
           })
         }
-
+        console.log(this.state.player1_score,this.state.player2_score,this.state.player2_score<this.state.player1_score,this.state.player1_score<this.state.player2_score)
         if(parseInt(this.props.no_of_games)<game_no )
         {
           if(this.state.player2_score<this.state.player1_score)
@@ -162,12 +162,28 @@ class Game extends React.Component {
         }
       }
       else{
-       
-          this.setState({
-            isGameOver:true
-          })
-       
-        
+        let arr=squares.filter((data)=>{
+            if(data!='') return data;
+        })
+
+        if(arr.length==9)
+        {
+          if(parseInt(this.props.no_of_games)<parseInt(this.state.playing_game) + 1 )
+          {
+            this.setState({
+              isGameDraw:true,
+              playing_game:'play again'
+            })
+          }
+          else{
+            this.setState({
+              isGameOver:true,
+              playing_game:this.state.playing_game==='play again'?'play again':parseInt(this.state.playing_game) + 1
+            })
+          }
+          
+        }
+          
       }
     });
   }
@@ -245,11 +261,17 @@ class Game extends React.Component {
               {
                 this.winner?
                 <div>
+                  {!this.state.isGameDraw?
                   <div className='game_congratulations_div'>
                     Congratulations!
                   </div>
+                  :null}
                   {this.state.playing_game==='play again'?
-                  <div className='game_info_header_div'>  
+                  this.state.isGameDraw?
+                  <div className='game_info_header_div'>
+                      No one won the tournament
+                  </div>
+                  :<div className='game_info_header_div'>  
                     <label style={{fontWeight: 600}}>
                       {this.state.who_won_tornament=='01'?
                         this.props.player_1?this.props.player_1:'Player 01':
@@ -267,6 +289,11 @@ class Game extends React.Component {
                 </div>:
                 <div>
                   {
+                    this.state.isGameOver || this.state.isGameDraw?
+                    <div className='game_info_header_div'>
+                     {this.state.isGameDraw?'No one won the tournament':'No one win'}
+                    </div>
+                    :
                     <div className='game_info_header_div'>
                       Playing game {this.state.playing_game}
                     </div>  
@@ -315,7 +342,7 @@ class Game extends React.Component {
                 </button>
               </Link> 
               :
-              this.state.isNextGame || (this.state.isNextGame && this.state.isGameOver) ?
+              this.state.isNextGame || this.state.isGameOver ?
                 <button className='game_play_board_button game_board_undo' onClick={() => this.nextGame()}>
                 Next Game
               </button>

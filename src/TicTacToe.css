@@ -30,6 +30,7 @@ ol, ul {
   font-weight: bold;
   border-radius: 50%;
   line-height: 34px;
+  cursor: pointer;
   height: 50px;
   margin-right: -1px;
   margin-top: -1px;
@@ -139,6 +140,7 @@ ol, ul {
   height: 50px;
   outline: none;
   margin-bottom: 11px;
+  cursor: pointer;
 }
 .game_board_undo{
   background: #4B7BFF 0% 0% no-repeat padding-box;
