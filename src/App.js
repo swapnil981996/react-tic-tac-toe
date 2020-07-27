@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import './TicTacToe.css';
+import './game/TicTacToe.css';
 import StartScreen from './start_screen/StartScreen'
 import PlayerScreen from './player_screen/PlayerScreen'
 import {
@@ -10,7 +10,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Game from './Game.js';
+import Game from './game/Game.js';
 
 class App extends Component {
   constructor(props)

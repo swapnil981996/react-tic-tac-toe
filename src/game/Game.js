@@ -1,7 +1,7 @@
 import React from 'react';
 import Board from './Board';
-import avatar1 from './images/avatar01.png'
-import avatar2 from './images/avatar02.png'
+import avatar1 from '../images/avatar01.png'
+import avatar2 from '../images/avatar02.png'
 import clsx from 'clsx'
 import {Link} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -138,7 +138,6 @@ class Game extends React.Component {
             player2_score:this.state.player2_score+1
           })
         }
-        console.log(this.state.player1_score,this.state.player2_score,this.state.player2_score<this.state.player1_score,this.state.player1_score<this.state.player2_score)
         if(parseInt(this.props.no_of_games)<game_no )
         {
           if(this.state.player2_score<this.state.player1_score)

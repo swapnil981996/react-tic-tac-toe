@@ -1,6 +1,6 @@
 import React from 'react';
-import avatar1 from './images/avatar01.png'
-import avatar2 from './images/avatar02.png'
+import avatar1 from '../images/avatar01.png'
+import avatar2 from '../images/avatar02.png'
 import clsx from 'clsx'
 
 function Square(props){
